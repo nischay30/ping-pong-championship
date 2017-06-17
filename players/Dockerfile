@@ -1,4 +1,4 @@
-FROM mhart/alpine-node
+FROM node
 RUN mkdir -p /usr/app
 WORKDIR /usr/app
 COPY . .
