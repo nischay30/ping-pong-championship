@@ -2,71 +2,111 @@ version: "2"
 services:
   referee:
     build: './referee'
+    depends_on:
+      - redis
     ports:
-      - 8080:8080
+      - 8080:80
     environment:
-      EXPRESS_PORT: 8080
+      EXPRESS_PORT: 80
+      REDIS_HOST: 'redis'
+      REDIS_PORT: 6379
+      NIKHIL_HOST: 'player-nikhil'
+      MIHIR_HOST: 'player-mihir'
+      AMIT_HOST: 'player-amit'
+      JOEY_HOST: 'player-joey'
+      CHANDLER_HOST: ;player-chandler
+      VIVEK_HOST: 'player-vivek'
+      RUSSEL_HOST: 'player-russel'
+      PRITAM_HOST: 'player-pritam'
   player-nikhil:
     build: './players'
+    depends_on:
+      - referee
     ports:
-      - 8081:8081
+      - 8081:80
     environment:
-      EXPRESS_PORT: 8081
+      EXPRESS_PORT: 80
       PLAYER_NAME: 'Nikhil'
       DEFENCE_ARRAY_LENGTH: 8
+      REFEREE_PORT: 'referee'
   player-mihir:
     build: './players'
+    depends_on:
+      - referee
     ports:
-      - 8082:8082
+      - 8082:80
     environment:
-      EXPRESS_PORT: 8082
+      EXPRESS_PORT: 80
       PLAYER_NAME: 'Mihir'
       DEFENCE_ARRAY_LENGTH: 8
+      REFEREE_PORT: 'referee'
   player-amit:
     build: './players'
+    depends_on:
+      - referee
     ports:
-      - 8083:8083
+      - 8083:80
     environment:
-      EXPRESS_PORT: 8083
+      EXPRESS_PORT: 80
       PLAYER_NAME: 'Amit'
       DEFENCE_ARRAY_LENGTH: 7
+      REFEREE_PORT: 'referee'
   player-joey:
     build: './players'
+    depends_on:
+      - referee
     ports:
-      - 8084:8084
+      - 8084:80
     environment:
-      EXPRESS_PORT: 8084
+      EXPRESS_PORT: 80
       PLAYER_NAME: 'Joey'
       DEFENCE_ARRAY_LENGTH: 7
+      REFEREE_PORT: 'referee'
   player-chandler:
     build: './players'
+    depends_on:
+      - referee
     ports:
-      - 8085:8085
+      - 8085:80
     environment:
-      EXPRESS_PORT: 8085
+      EXPRESS_PORT: 80
       PLAYER_NAME: 'Chandler'
       DEFENCE_ARRAY_LENGTH: 6
+      REFEREE_PORT: 'referee'
   player-vivek:
     build: './players'
+    depends_on:
+      - referee
     ports:
-      - 8086:8086
+      - 8086:80
     environment:
-      EXPRESS_PORT: 8086
+      EXPRESS_PORT: 80
       PLAYER_NAME: 'Vivek'
       DEFENCE_ARRAY_LENGTH: 6
+      REFEREE_PORT: 'referee'
   player-russel:
     build: './players'
+    depends_on:
+      - referee
     ports:
-      - 8087:8087
+      - 8087:80
     environment:
-      EXPRESS_PORT: 8087
+      EXPRESS_PORT: 80
       PLAYER_NAME: 'Russel'
       DEFENCE_ARRAY_LENGTH: 5
+      REFEREE_PORT: 'referee'
   player-pritam:
     build: './players'
+    depends_on:
+      - referee
     ports:
-      - 8088:8088
+      - 8088:80
     environment:
-      EXPRESS_PORT: 8088
+      EXPRESS_PORT: 80
       PLAYER_NAME: 'Pritam'
       DEFENCE_ARRAY_LENGTH: 5
+      REFEREE_PORT: 'referee'
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
